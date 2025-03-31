@@ -1,0 +1,6 @@
+@ItauChallenge_HostAddress = http://localhost:5262
+
+GET {{ItauChallenge_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
