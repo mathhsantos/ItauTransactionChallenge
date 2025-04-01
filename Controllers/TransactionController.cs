@@ -20,10 +20,6 @@ namespace ItauChallenge.Controllers {
 
             try {
 
-                if (transaction.DataHora > DateTime.UtcNow) {
-                    return StatusCode(400, new ResponseViewModel<string>("Não pode realizar transferencia com data no futuro!"));
-                }
-
                 if (!ModelState.IsValid) {
                     var erros = ModelState.Values
                         .SelectMany(v => v.Errors)
@@ -31,6 +27,10 @@ namespace ItauChallenge.Controllers {
                         .ToList();
 
                     return StatusCode(400, new ResponseViewModel<string>(erros));
+                }
+
+                if (transaction.DataHora > DateTime.UtcNow) {
+                    return StatusCode(400, new ResponseViewModel<string>("Não pode realizar transferencia com data no futuro!"));
                 }
 
                 _transactionRepository.AddTransaction(transaction);
