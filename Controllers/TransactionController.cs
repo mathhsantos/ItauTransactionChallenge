@@ -53,7 +53,13 @@ namespace ItauChallenge.Controllers {
                 var transactions = _transactionRepository.GetTransaction().Where(x => x.DataHora >= validTime).ToList();
 
                 if (transactions.Count == 0) {
-                    return BadRequest(new ResponseViewModel<string>("Não existe transações nos ultimos 60 segundos"));
+                    return BadRequest(new ResponseViewModel<GetTransactionDto>( new GetTransactionDto () {
+                        Avg = 0,
+                        Count = 0,
+                        Max = 0,
+                        Min = 0,
+                        Sum = 0
+                    }));
                 }
 
                 return Ok(new ResponseViewModel<GetTransactionDto>(new GetTransactionDto() {
