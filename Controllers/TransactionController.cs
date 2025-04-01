@@ -63,11 +63,11 @@ namespace ItauChallenge.Controllers {
                 }
 
                 return Ok(new ResponseViewModel<GetTransactionDto>(new GetTransactionDto() {
-                    Avg = transactions.Average(x => x.Valor),
+                    Avg = Math.Round(transactions.Average(x => x.Valor) ?? 0, 2),
                     Count = transactions.Count,
-                    Max = transactions.Max(x => x.Valor),
-                    Min = transactions.Min(x => x.Valor),
-                    Sum = transactions.Sum(x => x.Valor)
+                    Max = Math.Round(transactions.Max(x => x.Valor) ?? 0, 2),
+                    Min = Math.Round(transactions.Min(x => x.Valor) ?? 0, 2),
+                    Sum = Math.Round(transactions.Sum(x => x.Valor) ?? 0, 2)
                 }));
 
             } catch {
